@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Create Note{% endblock page_title %}
+
+{% block content %}
+  <h1>Create Note</h1>
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" value="created note">Create</button>
+  </form>
+{% endblock content %}

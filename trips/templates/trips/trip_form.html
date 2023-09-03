@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Create Trip{% endblock page_title %}
+
+{% block content %}
+  <h1>Create Trip</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" value="Saved">Save</button>
+  </form>
+{% endblock content %}

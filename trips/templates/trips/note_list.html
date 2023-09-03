@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block page_title %}All Notes{% endblock page_title %}
+
+{% block content %}
+  <h1>All of my Notes</h1>
+  {% for note in object_list %}
+  <a href="{% url 'note-detail' note.pk %}">
+    <p>{{note.name}}</p>
+    <p>{{note.rating}}</p>
+    <img src="{{note.img.url}}" alt="{{note.name}}">
+  </a>
+  {% endfor %}
+
+  <div>
+    <a href="{% url 'create-note' %}">Add Note</a>
+  </div>
+{% endblock content %}

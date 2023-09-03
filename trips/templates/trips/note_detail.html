@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block page_title %}{{ note.name }}{% endblock page_title %}
+
+{% block content %}
+  <h1>{{ note.name }}</h1>
+  <h3>{{ note.type }}</h3>
+  <p>{{ note.description }}</p>
+  <p>{{ note.rating }}</p>
+  <img src="{{note.img.url}}" alt="{{note.name}}">
+
+  <div>
+    <a href="{% url 'note-list' %}">All Notes</a>
+    <a href="{% url 'note-update' note.pk %}">Update Note</a>
+    <form action="{% url 'note-delete' note.pk %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" value="delete">Delete</button>
+    </form>
+  </div>
+{% endblock content %}

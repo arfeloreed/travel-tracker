@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block page_title %}{{ trip.city }} Trip{% endblock page_title %}
+
+{% block content %}
+  <h1>My trip detail on {{ trip.city }}.</h1>
+  <div>
+    <h3>City: {{ trip.city }}</h3>
+    <p>From: {{ trip.start_date }}</p>
+    <p>To: {{ trip.end_date }}</p>
+  </div>
+  
+  <div>
+    <h2>Notes:</h2>
+    {% for note in notes %}
+    <a href="{% url 'note-detail' note.pk %}">
+      <h3>{{ note.name }}</h3>
+      {% comment %} <p>{{ note.type }}</p> {% endcomment %}
+      <img class="note-img" src="{{ note.img.url }}" alt="{{note.name}}">
+      {% comment %} <p>{{ note.rating }}</p> {% endcomment %}
+      {% comment %} <p>{{ note.description }}</p> {% endcomment %}
+    </a>
+      {% endfor %}
+  </div>
+
+  <div>
+    <a href="">Add note</a>
+    <a href="{% url 'trips-list' %}">All trips</a>
+    <a href="{% url 'trip-update' trip.pk %}">Update Trip</a>
+    <form action="{% url 'trip-delete' trip.pk %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" value="delete">Delete Trip</button>
+    </form>
+  </div>
+{% endblock content %}
