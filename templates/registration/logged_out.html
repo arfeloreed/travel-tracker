@@ -1,2 +1,11 @@
-<h1>You've been logged out.</h1>
-<a href="{% url 'login' %}">Login here!</a>
+{% extends 'base.html' %}
+
+{% block page_title %}You're logged off{% endblock page_title %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center flex-column"
+  style="height: 100vh; width: 100vw;">
+  <h1>You've been logged out.</h1>
+  <a class="btn btn-primary mt-4 px-5 px-3" href="{% url 'login' %}">Login here!</a>
+</div>
+{% endblock content %}

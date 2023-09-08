@@ -1,18 +1,27 @@
-{% if form.errors %}
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block login_link %}active{% endblock login_link %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center flex-column" style="height: 90vh; width: 100vw;">
+  {% if form.errors %}
   <p>You have entered an incorrect username or password.</p>
-{% endif %}
-
-{% if next %}
-  {% if not user.is_authenticated %}
-    <p>To view that page, login first</p>
-  {% else %}
-    <p>Please login</p>
   {% endif %}
-{% endif %}
 
-<form action="{% url 'login' %}" method="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="hidden" name="next" value="{{ next }}">
-  <button type="submit" value="Login">Login</button>
-</form>
+  {% if next %}
+  {% if not user.is_authenticated %}
+  <p>To view that page, login first</p>
+  {% else %}
+  <p>Please login</p>
+  {% endif %}
+  {% endif %}
+
+  <form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button class="btn btn-success px-5 py-2" type="submit" value="Login">Login</button>
+  </form>
+</div>
+{% endblock content %}

@@ -3,18 +3,26 @@
 {% block page_title %}{{ note.name }}{% endblock page_title %}
 
 {% block content %}
-  <h1>{{ note.name }}</h1>
-  <h3>{{ note.type }}</h3>
-  <p>{{ note.description }}</p>
-  <p>{{ note.rating }}</p>
-  <img src="{{note.img.url}}" alt="{{note.name}}">
+<div class="container py-5">
 
-  <div>
-    <a href="{% url 'note-list' %}">All Notes</a>
-    <a href="{% url 'note-update' note.pk %}">Update Note</a>
-    <form action="{% url 'note-delete' note.pk %}" method="POST">
-      {% csrf_token %}
-      <button type="submit" value="delete">Delete</button>
-    </form>
+  <div class="row">
+    <div class="col-12 mb-3">
+      <h1>{{ note.name }}</h1>
+      <hr class="bg-secondary border-4 border-top border-secondary" />
+      <h3>{{ note.type|title }}</h3>
+      <p>{{ note.description }}</p>
+      <p>Rating: {{ note.rating }} stars</p>
+      <img class="rounded" src="{{note.img.url}}" alt="{{note.name}}" style="width: 100%;">
+    </div>
+
+    <div class="col-12">
+      <a class="btn btn-outline-primary py-2 px-3" href="{% url 'note-update' note.pk %}">Update Note</a>
+      <form class="d-inline-block ms-3" action="{% url 'note-delete' note.pk %}" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-outline-danger py-2 px-3" type="submit" value="delete">Delete Note</button>
+      </form>
+    </div>
   </div>
+
+</div>
 {% endblock content %}

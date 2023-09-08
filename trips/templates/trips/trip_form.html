@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block page_title %}Create Trip{% endblock page_title %}
 
+{% block link_2 %}active{% endblock link_2 %}
+
 {% block content %}
+<div class="container pt-5">
   <h1>Create Trip</h1>
   <form action="" method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" value="Saved">Save</button>
+    {{ form|crispy }}
+    <button class="btn btn-primary text-uppercase fw-bold px-5 py-2" type="submit" value="Saved">Save</button>
   </form>
+</div>
 {% endblock content %}

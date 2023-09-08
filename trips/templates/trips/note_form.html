@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block page_title %}Create Note{% endblock page_title %}
 
+{% block link_3 %}active{% endblock link_3 %}
+
 {% block content %}
-  <h1>Create Note</h1>
-  <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit" value="created note">Create</button>
-  </form>
+  <main id="note-form">
+
+    <h1 class="text-center mt-5 mb-3">Create Note</h1>
+
+    <div class="container">
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button class="btn btn-primary text-uppercase fw-bold px-5 py-2" type="submit" value="created note">Create</button>
+      </form>
+    </div>
+  </main>
 {% endblock content %}

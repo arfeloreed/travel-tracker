@@ -1,0 +1,9 @@
+#home-con {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-top: 100px;
+  background-color: #eef1ff;
+}

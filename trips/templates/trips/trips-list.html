@@ -1,25 +1,40 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block page_title %}All Trips{% endblock page_title %}
 
-{% block content %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'trips/trips-list.css' %}">
+{% endblock css %}
 
-  {% if user.is_authenticated %}
-    <p>You've logged in as {{ user.username }}</p>
-    <a href="{% url 'logout' %}">Logout</a>
-  {% else %}
-    <a href="{% url 'login' %}">Please login</a>
-  {% endif %}
+{% block link_2 %}active{% endblock link_2 %}
+
+{% block content %}
+<div class="container pt-5">
+  <p>Hi {{ user.username|title }}, manage your trips.</p>
 
   <h1>All the trips I made</h1>
-  <ul>
-    {% for trip in trips %}
-      <li><a href="{% url 'trip-detail' trip.id %}">{{ trip.country_code }} | {{ trip.city }}</a></li>
-    {% endfor %}
-  </ul>
 
-  <div>
-    <a href="{% url 'create-trip' %}" target="_blank">Create Trip</a>
-    <a href="{% url 'note-list' %}" target="_blank">All my Notes</a>
+  <div class="row mt-5 p-5">
+
+    {% for trip in trips %}
+    <div class="col-6 col-md-4 col-lg-3">
+      <a class="link-underline link-underline-opacity-0" target="_blank" href="{% url 'trip-detail' trip.id %}">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">{{ trip.city }}</h2>
+            <h5 class="card-subtitle mb-2 text-body-secondary">{{ trip.country_code }}</h5>
+            <p class="card-text mb-0 mt-3 text-secondary">When:</p>
+            <p class="card-text mb-0">{{ trip.start_date }}</p>
+            <p class="card-text mb-0 text-secondary">To:</p>
+            <p class="card-text">{{ trip.end_date }}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+
   </div>
+
+</div>
 {% endblock content %}
